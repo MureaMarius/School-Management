@@ -9,27 +9,30 @@ class ConnectionToMySqlServer:
         self.is_connected = 0
         self.username = username
         self.password = password
+        self.connection = None
 
     def connect_to_mysql_server(self):
         try:
-            connection = mysql.connector.connect(host='localhost',
+            self.connection = mysql.connector.connect(host='localhost',
                                                 database='my_db',
                                                 user=self.username,
                                                 password=self.password)
-            if connection.is_connected():
-                db_info = connection.get_server_info()
-                print("Connected to MySQL Server version ", db_info)
+            if self.connection.is_connected():
                 messagebox.showinfo(title="Login Success", message="You successfully logged in.")
-
-                cursor = connection.cursor()
-                """cursor.execute("select * from persons")
-                record = cursor.fetchone()"""
-
                 self.is_connected = 1
         except Error as e:
             messagebox.showerror(title="Error", message="Invalid login.")
-        finally:
-            if connection.is_connected():
-                cursor.close()
-                connection.close()
-                print("MySQL connection is closed")
+
+    def create_class_row(self, id: int, class_name: str, number_of_students: str, average_grade: str):
+        command = ("INSERT INTO Clase (id, class_name, number_of_students, average_grade) VALUES({id}, '{class_name}', "
+                   "'{number_of_students}', '{average_grade}')").format(id=id, class_name=class_name, number_of_students=number_of_students,
+                                                                   average_grade=average_grade)
+
+        if self.connection.is_connected():
+            print(command)
+
+            cursor = self.connection.cursor()
+            cursor.execute(command)
+
+            self.connection.commit()
+            self.connection.close()
