@@ -160,8 +160,19 @@ class Clase:
         self.create_row_button = Button(self.frame, text="POST", font=("Arial", 16), command=self.create_row)
         self.create_row_button.place(x=400, y=300)
 
+        self.get_information_button = Button(self.frame, text="GET", font=("Arial", 16), command=self.get_information)
+        self.get_information_button.place(x=400, y=370)
+
         self.master.mainloop()
 
     def create_row(self):
         my_connection.create_class_row(self.class_id_entry.get(), self.class_name_entry.get(),
                                        self.number_of_students_entry.get(), self.average_grade_entry.get())
+
+        self.class_id_entry.delete(0, END)
+        self.class_name_entry.delete(0, END)
+        self.number_of_students_entry.delete(0, END)
+        self.average_grade_entry.delete(0, END)
+
+    def get_information(self):
+        return None

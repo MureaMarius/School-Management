@@ -35,4 +35,3 @@ class ConnectionToMySqlServer:
             cursor.execute(command)
 
             self.connection.commit()
-            self.connection.close()
