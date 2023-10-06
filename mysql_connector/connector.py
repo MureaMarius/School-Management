@@ -23,10 +23,23 @@ class ConnectionToMySqlServer:
         except Error as e:
             messagebox.showerror(title="Error", message="Invalid login.")
 
-    def create_class_row(self, id: int, class_name: str, number_of_students: str, average_grade: str):
+    def create_class(self, id: int, class_name: str, number_of_students: str, average_grade: str):
         command = ("INSERT INTO Clase (id, class_name, number_of_students, average_grade) VALUES({id}, '{class_name}', "
                    "'{number_of_students}', '{average_grade}')").format(id=id, class_name=class_name, number_of_students=number_of_students,
                                                                    average_grade=average_grade)
+
+        if self.connection.is_connected():
+            print(command)
+
+            cursor = self.connection.cursor()
+            cursor.execute(command)
+
+            self.connection.commit()
+
+    def create_student(self, id: int, student_first_name: str, student_last_name: str, absences: int):
+        command = ("INSERT INTO Students (id, student_first_name, student_last_name, absences) VALUES({id}, '{student_first_name}', "
+                   "'{student_last_name}', '{absences}')").format(id=id, class_name=student_first_name, number_of_students=student_last_name,
+                                                                   average_grade=absences)
 
         if self.connection.is_connected():
             print(command)

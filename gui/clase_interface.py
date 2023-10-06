@@ -13,7 +13,7 @@ class Clase:
         self.frame.grid(row=0, column=0, sticky=NSEW)
 
         initial_image = (Image.open('C:\\Users\\Marius Murea\\Desktop\\Python\\SchoolManagement\\images\\school.png'))
-        resized_image = initial_image.resize((500, 150))
+        resized_image = initial_image.resize((500, 200))
         new_school_image = ImageTk.PhotoImage(resized_image)
 
         self.school_image = Label(self.frame, image=new_school_image, borderwidth=0, compound=CENTER)
@@ -55,8 +55,8 @@ class Clase:
         self.master.mainloop()
 
     def create_row(self):
-        self.my_connection.create_class_row(self.class_id_entry.get(), self.class_name_entry.get(),
-                                       self.number_of_students_entry.get(), self.average_grade_entry.get())
+        self.my_connection.create_class(self.class_id_entry.get(), self.class_name_entry.get(),
+                                        self.number_of_students_entry.get(), self.average_grade_entry.get())
 
         self.class_id_entry.delete(0, END)
         self.class_name_entry.delete(0, END)
