@@ -1,5 +1,5 @@
 from tkinter import Tk
-from gui.user_interface import StartDisplay
+from gui.login_interface import StartDisplay
 
 
 def main():
