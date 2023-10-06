@@ -23,14 +23,14 @@ class Clase:
         self.class_id = Label(self.frame, text="ID: ", borderwidth=0, compound=CENTER, font=('Arial', 20))
         self.class_id.place(x=10, y=245)
 
-        self.class_id_entry = Entry(self.frame, font=("Arial", 16), width=3)
-        self.class_id_entry.place(x=60, y=250)
+        self.class_id_entry = Entry(self.frame, font=("Arial", 16), width=4)
+        self.class_id_entry.place(x=270, y=250)
 
         self.class_name = Label(self.frame, text="Class Name: ", borderwidth=0, compound=CENTER, font=('Arial', 20))
         self.class_name.place(x=10, y=285)
 
         self.class_name_entry = Entry(self.frame, font=("Arial", 16), width=4)
-        self.class_name_entry.place(x=170, y=290)
+        self.class_name_entry.place(x=270, y=290)
 
         self.number_of_students = Label(self.frame, text="Number Of Students: ", borderwidth=0, compound=CENTER,
                                         font=('Arial', 20))
@@ -44,7 +44,7 @@ class Clase:
         self.average_grade.place(x=10, y=390)
 
         self.average_grade_entry = Entry(self.frame, font=("Arial", 16), width=4)
-        self.average_grade_entry.place(x=215, y=395)
+        self.average_grade_entry.place(x=270, y=395)
 
         self.create_row_button = Button(self.frame, text="POST", font=("Arial", 16), command=self.create_row)
         self.create_row_button.place(x=400, y=300)

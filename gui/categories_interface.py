@@ -2,6 +2,7 @@ from tkinter import *
 from PIL import ImageTk, Image
 
 from gui.clase_interface import Clase
+from gui.elevi_interface import Elevi
 
 
 class CategoriesDisplay:
@@ -51,5 +52,8 @@ class CategoriesDisplay:
         if category == "Clase":
             self.master = Tk()
             self.app = Clase(self.master, self.my_connection)
+        elif category == "Elevi":
+            self.master = Tk()
+            self.app = Elevi(self.master, self.my_connection)
 
         self.master.mainloop()
