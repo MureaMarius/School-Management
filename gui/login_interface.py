@@ -18,11 +18,11 @@ class StartDisplay:
         self.master = master
         self.master.title("PDF EXPORTER")
 
-        self.frame = Frame(self.master, width=600, height=400, relief=RAISED)
+        self.frame = Frame(self.master, width=700, height=400, relief=RAISED)
         self.frame.grid(row=0, column=0, sticky=NSEW)
 
         initial_image = (Image.open('C:\\Users\\Marius Murea\\Desktop\\Python\\SchoolManagement\\images\\school.png'))
-        resized_image = initial_image.resize((500, 250))
+        resized_image = initial_image.resize((600, 250))
         new_school_image = ImageTk.PhotoImage(resized_image)
 
         self.school_image = Label(self.frame, image=new_school_image, borderwidth=0, compound=CENTER)
@@ -31,7 +31,7 @@ class StartDisplay:
 
         self.log_in = Button(self.frame, text="Try to LOG IN", command=self.log_in_button_function,
                              activeforeground="#FFFFFF", activebackground="Green")
-        self.log_in.place(x=250, y=300)
+        self.log_in.place(x=300, y=300)
         self.log_in.configure(width=15, height=2)
 
     def log_in_button_function(self):

@@ -55,7 +55,7 @@ class Elevi:
         self.master.mainloop()
 
     def create_row(self):
-        self.my_connection.create_class_row(self.student_id_entry.get(), self.student_first_name_entry.get(),
+        self.my_connection.create_student(self.student_id_entry.get(), self.student_first_name_entry.get(),
                                        self.student_last_name_entry.get(), self.absente_entry.get())
 
         self.student_id_entry.delete(0, END)
