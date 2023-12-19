@@ -1,6 +1,9 @@
 from tkinter import *
 from PIL import ImageTk, Image
 
+import utility.pdf_functions as pdf
+import gui.categories_interface
+
 
 class Elevi:
     def __init__(self, master, my_connection):
@@ -64,4 +67,14 @@ class Elevi:
         self.absente_entry.delete(0, END)
 
     def get_information(self):
-        return None
+        data = self.my_connection.get_data_from_table("Students")
+        pdf.create_pdf(data)
+
+    def reset_class_table(self):
+        self.my_connection.reset_tables("Students")
+
+    def back_to_categories_display(self):
+        self.master.destroy()
+        self.master = Tk()
+        self.app = gui.categories_interface.CategoriesDisplay(self.master, self.my_connection)
+        self.master.mainloop()

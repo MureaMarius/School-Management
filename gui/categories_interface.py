@@ -1,6 +1,7 @@
 from tkinter import *
 from PIL import ImageTk, Image
 
+import gui.login_interface
 from gui.clase_interface import Clase
 from gui.elevi_interface import Elevi
 
@@ -50,6 +51,10 @@ class CategoriesDisplay:
         self.create_tables_button.config(font=("Courier bold", 16), width=13, height=1)
         self.create_tables_button.place(x=500, y=350)
 
+        self.back = Button(self.frame, text='Back', activebackground="Green", command=self.back_to_login_display)
+        self.back.config(font=("Courier bold", 16), width=7, height=1)
+        self.back.place(x=10, y=25)
+
         self.master.mainloop()
 
     def selected_category(self, category: str):
@@ -66,3 +71,9 @@ class CategoriesDisplay:
 
     def reset_database(self):
         self.my_connection.create_tables_for_categories()
+
+    def back_to_login_display(self):
+        self.master.destroy()
+        self.master = Tk()
+        self.app = gui.login_interface.StartDisplay(self.master)
+        self.master.mainloop()

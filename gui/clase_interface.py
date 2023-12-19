@@ -1,6 +1,9 @@
 from tkinter import *
 from PIL import ImageTk, Image
 
+import gui.categories_interface
+import utility.pdf_functions as pdf
+
 
 class Clase:
     def __init__(self, master, my_connection):
@@ -46,11 +49,18 @@ class Clase:
         self.average_grade_entry = Entry(self.frame, font=("Arial", 16), width=4)
         self.average_grade_entry.place(x=270, y=395)
 
+        self.reset_table_button = Button(self.frame, text="RESET", font=("Arial", 16), command=self.reset_class_table)
+        self.reset_table_button.place(x=400, y=250)
+
         self.create_row_button = Button(self.frame, text="POST", font=("Arial", 16), command=self.create_row)
-        self.create_row_button.place(x=400, y=300)
+        self.create_row_button.place(x=400, y=320)
 
         self.get_information_button = Button(self.frame, text="GET", font=("Arial", 16), command=self.get_information)
-        self.get_information_button.place(x=400, y=370)
+        self.get_information_button.place(x=400, y=390)
+
+        self.back = Button(self.frame, text='Back', activebackground="Green", command=self.back_to_categories_display)
+        self.back.config(font=("Courier bold", 16), width=5, height=1)
+        self.back.place(x=10, y=25)
 
         self.master.mainloop()
 
@@ -63,5 +73,15 @@ class Clase:
         self.number_of_students_entry.delete(0, END)
         self.average_grade_entry.delete(0, END)
 
+    def reset_class_table(self):
+        self.my_connection.reset_tables("Clase")
+
     def get_information(self):
-        return None
+        data = self.my_connection.get_data_from_table("Clase")
+        pdf.create_pdf(data)
+
+    def back_to_categories_display(self):
+        self.master.destroy()
+        self.master = Tk()
+        self.app = gui.categories_interface.CategoriesDisplay(self.master, self.my_connection)
+        self.master.mainloop()
