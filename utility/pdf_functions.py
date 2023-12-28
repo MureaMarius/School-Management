@@ -1,20 +1,42 @@
-from reportlab.pdfgen import canvas
+import aspose.pdf as pdf
 
 
 def create_pdf(sql_data: list, category_report: str):
-    pdf = canvas.Canvas(f"{category_report}.pdf".format(category_report=category_report))
+    pdfFile = pdf.Document()
+    newPage = pdfFile.pages.add()
 
-    pdf.setFont("Helvetica-Bold", 16)
-    pdf.drawString(50, 750, "DATA REPORT")
+    table = pdf.Table()
+    table.default_cell_border = pdf.BorderInfo(pdf.BorderSide.ALL, 1.0, pdf.Color.black)
 
-    pdf.setFont("Helvetica", 12)
-    y = 700
+    create_header(category_report, table)
+    for rowNumber in range(0, len(sql_data)):
+        row = table.rows.add()
 
-    for row in sql_data:
-        pdf.drawString(50, y, "Id: " + str(row[0]))
-        pdf.drawString(50, y - 20, "Class name: " + row[1])
-        pdf.drawString(50, y - 40, "Number of students: " + str(row[2]))
-        pdf.drawString(50, y - 60, "Average grade: " + str(row[3]))
-        y -= 120
+        if category_report == "Classes" or category_report == "Students":
+            row.cells.add(str(sql_data[rowNumber][0]))
+            row.cells.add(str(sql_data[rowNumber][1]))
+            row.cells.add(str(sql_data[rowNumber][2]))
+            row.cells.add(str(sql_data[rowNumber][3]))
+        elif category_report == "Teachers":
+            pass
 
-    pdf.save()
+    newPage.paragraphs.add(table)
+
+    pdfFile.save(f"{category_report}.pdf")
+    print("Table in PDF created successfully")
+
+
+def create_header(category_report: str, table):
+    row = table.rows.add()
+    if category_report == "Classes":
+        row.cells.add("ID")
+        row.cells.add("CLASS NAME")
+        row.cells.add("NUMBER OF STUDENTS")
+        row.cells.add("AVERAGE GRADE")
+    elif category_report == "Students":
+        row.cells.add("ID")
+        row.cells.add("STUDENT FIRST NAME")
+        row.cells.add("STUDENT LAST NAME")
+        row.cells.add("ABSENCES")
+    elif category_report == "Teachers":
+        pass

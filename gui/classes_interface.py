@@ -5,7 +5,7 @@ import gui.categories_interface
 import utility.pdf_functions as pdf
 
 
-class Clase:
+class Classes:
     def __init__(self, master, my_connection):
         self.master = master
         self.master.title("PDF EXPORTER")
@@ -74,11 +74,11 @@ class Clase:
         self.average_grade_entry.delete(0, END)
 
     def reset_class_table(self):
-        self.my_connection.reset_tables("Clase")
+        self.my_connection.reset_tables("Classes")
 
     def get_information(self):
-        data = self.my_connection.get_data_from_table("Clase")
-        pdf.create_pdf(data)
+        data = self.my_connection.get_data_from_table("Classes")
+        pdf.create_pdf(data, "Classes")
 
     def back_to_categories_display(self):
         self.master.destroy()

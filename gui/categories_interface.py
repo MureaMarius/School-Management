@@ -2,8 +2,8 @@ from tkinter import *
 from PIL import ImageTk, Image
 
 import gui.login_interface
-from gui.clase_interface import Clase
-from gui.elevi_interface import Elevi
+from gui.classes_interface import Classes
+from gui.students_interface import Students
 
 
 class CategoriesDisplay:
@@ -26,25 +26,25 @@ class CategoriesDisplay:
         self.school_image.image = new_school_image
         self.school_image.place(x=75, y=0)
 
-        self.categoria_clase = Button(self.frame, text='Clase', activebackground="Green",
-                                      command=lambda: self.selected_category('Clase'))
-        self.categoria_clase.config(font=("Courier bold", 16), width=7, height=1)
-        self.categoria_clase.place(x=150, y=300)
+        self.category_classes = Button(self.frame, text='Classes', activebackground="Green",
+                                      command=lambda: self.selected_category('Classes'))
+        self.category_classes.config(font=("Courier bold", 16), width=7, height=1)
+        self.category_classes.place(x=150, y=300)
 
-        self.categoria_elevi = Button(self.frame, text='Elevi', activebackground="Green",
-                                      command=lambda: self.selected_category('Elevi'))
-        self.categoria_elevi.config(font=("Courier bold", 16), width=7, height=1)
-        self.categoria_elevi.place(x=150, y=400)
+        self.category_students = Button(self.frame, text='Students', activebackground="Green",
+                                      command=lambda: self.selected_category('Students'))
+        self.category_students.config(font=("Courier bold", 16), width=7, height=1)
+        self.category_students.place(x=150, y=400)
 
-        self.categoria_profesori = Button(self.frame, text='Profesori', activebackground="Green",
-                                          command=lambda: self.selected_category('Profesori'))
-        self.categoria_profesori.config(font=("Courier bold", 16), width=8, height=1)
-        self.categoria_profesori.place(x=325, y=300)
+        self.category_teachers = Button(self.frame, text='Teachers', activebackground="Green",
+                                          command=lambda: self.selected_category('Teachers'))
+        self.category_teachers.config(font=("Courier bold", 16), width=8, height=1)
+        self.category_teachers.place(x=325, y=300)
 
-        self.biblioteca = Button(self.frame, text='Biblioteca', activebackground="Green",
-                                 command=lambda: self.selected_category('Biblioteca'))
-        self.biblioteca.config(font=("Courier bold", 16), width=8, height=1)
-        self.biblioteca.place(x=325, y=400)
+        self.library = Button(self.frame, text='Library', activebackground="Green",
+                                 command=lambda: self.selected_category('Library'))
+        self.library.config(font=("Courier bold", 16), width=8, height=1)
+        self.library.place(x=325, y=400)
 
         self.create_tables_button = Button(self.frame, text="Reset Database", activebackground="Green",
                                            command=self.reset_database)
@@ -60,12 +60,14 @@ class CategoriesDisplay:
     def selected_category(self, category: str):
         self.master.destroy()
 
-        if category == "Clase":
+        if category == "Classes":
             self.master = Tk()
-            self.app = Clase(self.master, self.my_connection)
-        elif category == "Elevi":
+            self.app = Classes(self.master, self.my_connection)
+        elif category == "Students":
             self.master = Tk()
-            self.app = Elevi(self.master, self.my_connection)
+            self.app = Students(self.master, self.my_connection)
+        elif category == "Teachers":
+            pass
 
         self.master.mainloop()
 

@@ -24,7 +24,7 @@ class ConnectionToMySqlServer:
             messagebox.showerror(title="Error", message="Invalid login.")
 
     def create_class(self, id: int, class_name: str, number_of_students: str, average_grade: str):
-        command = ("INSERT INTO Clase (id, class_name, number_of_students, average_grade) VALUES({id}, '{class_name}', "
+        command = ("INSERT INTO Classes (id, class_name, number_of_students, average_grade) VALUES({id}, '{class_name}', "
                    "'{number_of_students}', '{average_grade}')").format(id=id, class_name=class_name,
                                                                         number_of_students=number_of_students,
                                                                         average_grade=average_grade)
@@ -61,7 +61,6 @@ class ConnectionToMySqlServer:
 
             return cursor.fetchall()
 
-
     def reset_tables(self, category: str):
         drop_command = f"DROP TABLE {category}".format(category=category)
 
@@ -77,9 +76,9 @@ class ConnectionToMySqlServer:
             except mysql.connector.Error as e:
                 print("Something went wrong: {}".format(e))
 
-            if category == "Clase":
+            if category == "Classes":
                 cursor.execute(
-                    "CREATE TABLE Clase (id int, class_name varchar(255), number_of_students int, average_grade float)")
+                    "CREATE TABLE Classes (id int, class_name varchar(255), number_of_students int, average_grade float)")
             elif category == "Students":
                 cursor.execute(
                     "CREATE TABLE Students (id int, student_first_name varchar(255), student_last_name varchar(255), absences int)")
