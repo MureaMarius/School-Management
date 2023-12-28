@@ -4,6 +4,7 @@ from PIL import ImageTk, Image
 import gui.login_interface
 from gui.classes_interface import Classes
 from gui.students_interface import Students
+from gui.teachers_interface import Teachers
 
 
 class CategoriesDisplay:
@@ -67,7 +68,8 @@ class CategoriesDisplay:
             self.master = Tk()
             self.app = Students(self.master, self.my_connection)
         elif category == "Teachers":
-            pass
+            self.master = Tk()
+            self.app = Teachers(self.master, self.my_connection)
 
         self.master.mainloop()
 

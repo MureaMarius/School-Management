@@ -52,6 +52,19 @@ class ConnectionToMySqlServer:
 
             self.connection.commit()
 
+    def create_teacher(self, id: int, teacher_name: str, number_of_classes: int):
+        command = (
+            "INSERT INTO Teachers (id, teacher_name, number_of_classes) VALUES({id}, '{teacher_name}', "
+            "'{number_of_classes}')").format(id=id, teacher_name=teacher_name, number_of_classes=number_of_classes)
+
+        if self.connection.is_connected():
+            print(command)
+
+            cursor = self.connection.cursor()
+            cursor.execute(command)
+
+            self.connection.commit()
+
     def get_data_from_table(self, category: str):
         select_command = f"SELECT * FROM {category}".format(category=category)
 
@@ -82,3 +95,6 @@ class ConnectionToMySqlServer:
             elif category == "Students":
                 cursor.execute(
                     "CREATE TABLE Students (id int, student_first_name varchar(255), student_last_name varchar(255), absences int)")
+            elif category == "Teachers":
+                cursor.execute(
+                    "CREATE TABLE Teachers (id int, teacher_name varchar(255), number_of_classes int)")

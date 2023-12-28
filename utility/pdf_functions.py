@@ -18,7 +18,9 @@ def create_pdf(sql_data: list, category_report: str):
             row.cells.add(str(sql_data[rowNumber][2]))
             row.cells.add(str(sql_data[rowNumber][3]))
         elif category_report == "Teachers":
-            pass
+            row.cells.add(str(sql_data[rowNumber][0]))
+            row.cells.add(str(sql_data[rowNumber][1]))
+            row.cells.add(str(sql_data[rowNumber][2]))
 
     newPage.paragraphs.add(table)
 
@@ -39,4 +41,6 @@ def create_header(category_report: str, table):
         row.cells.add("STUDENT LAST NAME")
         row.cells.add("ABSENCES")
     elif category_report == "Teachers":
-        pass
+        row.cells.add("ID")
+        row.cells.add("TEACHER NAME")
+        row.cells.add("NUMBER OF CLASSES")
