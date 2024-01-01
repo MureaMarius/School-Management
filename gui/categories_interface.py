@@ -40,17 +40,7 @@ class CategoriesDisplay:
         self.category_teachers = Button(self.frame, text='Teachers', activebackground="Green",
                                           command=lambda: self.selected_category('Teachers'))
         self.category_teachers.config(font=("Courier bold", 16), width=8, height=1)
-        self.category_teachers.place(x=325, y=300)
-
-        self.library = Button(self.frame, text='Library', activebackground="Green",
-                                 command=lambda: self.selected_category('Library'))
-        self.library.config(font=("Courier bold", 16), width=8, height=1)
-        self.library.place(x=325, y=400)
-
-        self.create_tables_button = Button(self.frame, text="Reset Database", activebackground="Green",
-                                           command=self.reset_database)
-        self.create_tables_button.config(font=("Courier bold", 16), width=13, height=1)
-        self.create_tables_button.place(x=500, y=350)
+        self.category_teachers.place(x=325, y=350)
 
         self.back = Button(self.frame, text='Back', activebackground="Green", command=self.back_to_login_display)
         self.back.config(font=("Courier bold", 16), width=7, height=1)
@@ -72,9 +62,6 @@ class CategoriesDisplay:
             self.app = Teachers(self.master, self.my_connection)
 
         self.master.mainloop()
-
-    def reset_database(self):
-        self.my_connection.create_tables_for_categories()
 
     def back_to_login_display(self):
         self.master.destroy()
